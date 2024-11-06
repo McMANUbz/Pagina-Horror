@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina Horror</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: white;
+        }
+
+        /* Butonul de donație în colțul din sus */
+        .donation-button {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #ff4747;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 5px;
+        }
+
+        .donation-button:hover {
+            background-color: #d13535;
+        }
+
+        /* Player YouTube în centrul paginii */
+        .video-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 70vh;
+        }
+
+        iframe {
+            width: 80%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Secțiunea poveștilor de groază */
+        .stories {
+            background-color: #333;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .story {
+            margin-bottom: 20px;
+            background-color: #444;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        /* Formular pentru povești noi */
+        .story-form {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #222;
+            border-radius: 10px;
+        }
+
+        .story-form input, .story-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #555;
+            background-color: #555;
+            color: white;
+        }
+
+        .story-form button {
+            padding: 10px 20px;
+            background-color: #ff4747;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Stiluri pentru chat */
+        .chat-container {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            width: 300px;
+            height: 400px;
+            background-color: #444;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-y: scroll;
+        }
+
+        .chat-box {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .chat-message {
+            background-color: #555;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .chat-input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #555;
+            background-color: #555;
+            color: white;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Butonul de donație -->
+    <button class="donation-button" onclick="window.open('https://revolut.me/alindokpx', '_blank')">Donație</button>
+
+    <!-- Player YouTube pentru video horror -->
+    <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <!-- Secțiunea poveștilor de groază -->
+    <div class="stories">
+        <h2>Povești de Groază</h2>
+        <div id="storyList">
+            <!-- Poveștile vor fi afișate aici -->
+        </div>
+
+        <!-- Formular pentru adăugarea poveștilor noi -->
+        <div class="story-form">
+            <h3>Adaugă o Poveste de Groază</h3>
+            <input type="text" id="storyTitle" placeholder="Titlu Poveste" />
+            <textarea id="storyContent" rows="4" placeholder="Scrie povestea ta aici..."></textarea>
+            <button onclick="addStory()">Adaugă Povestea</button>
+        </div>
+    </div>
+
+    <!-- Chat între utilizatori -->
+    <div class="chat-container">
+        <div class="chat-box" id="chatBox"></div>
+        <textarea class="chat-input" id="chatInput" placeholder="Scrie mesajul tău..."></textarea>
+        <button onclick="sendMessage()">Trimite</button>
+    </div>
+
+    <script>
+        // Funcționalitate pentru adăugarea poveștilor
+        const storyList = document.getElementById('storyList');
+
+        function addStory() {
+            const title = document.getElementById('storyTitle').value;
+            const content = document.getElementById('storyContent').value;
+            if (title && content) {
+                const story = document.createElement('div');
+                story.classList.add('story');
+                story.innerHTML = <h3>${title}</h3><p>${content}</p>;
+                storyList.appendChild(story);
+                document.getElementById('storyTitle').value = '';
+                document.getElementById('storyContent').value = '';
+            }
+        }
+
+        // Funcționalitate pentru chat
+        const chatBox = document.getElementById('chatBox');
+
+        function sendMessage() {
+            const message = document.getElementById('chatInput').value;
+            if (message) {
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('chat-message');
+                messageElement.textContent = message;
+                chatBox.appendChild(messageElement);
+                document.getElementById('chatInput').value = '';
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+        }
+    </script>
+
+</body>
+</html>
