@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina Horror</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #f1c40f;
+        }
+        .content {
+            padding: 20px;
+        }
+        .donate-button {
+            background-color: #00b894;
+            color: white;
+            padding: 15px 30px;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 5px;
+            display: block;
+            width: 200px;
+            margin: 30px auto;
+        }
+        .donate-button:hover {
+            background-color: #098a72;
+        }
+        .chat-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            height: 400px;
+            background-color: #222;
+            border: 1px solid #444;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .chat-box {
+            width: 100%;
+            height: 300px;
+            background-color: #333;
+            color: #fff;
+            overflow-y: scroll;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .chat-input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background-color: #444;
+            color: #fff;
+        }
+        .chat-button {
+            background-color: #00b894;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .chat-button:hover {
+            background-color: #098a72;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Povești și Video Horror</h1>
+</header>
+
+<div class="content">
+    <h2>Descoperă cele mai înfricoșătoare povești și videoclipuri horror!</h2>
+    <p>Pe acest site vei găsi povești horror scrise de tine și videoclipuri care te vor ține cu sufletul la gură!</p>
+
+    <!-- Buton de donație Revolut -->
+    <a href="https://revolut.me/alindokpx" class="donate-button" target="_blank">Dă o Donație</a>
+</div>
+
+<!-- Chat -->
+<div class="chat-container">
+    <div class="chat-box" id="chatBox"></div>
+    <textarea id="chatInput" class="chat-input" placeholder="Scrie un mesaj..." rows="3"></textarea>
+    <button id="sendMessage" class="chat-button">Trimite</button>
+</div>
+
+<script>
+    // Functia care adauga mesajul in chat
+    document.getElementById('sendMessage').addEventListener('click', function() {
+        var chatBox = document.getElementById('chatBox');
+        var chatInput = document.getElementById('chatInput').value;
+        
+        if (chatInput.trim() !== "") {
+            var newMessage = document.createElement('div');
+            newMessage.textContent = chatInput;
+            chatBox.appendChild(newMessage);
+            
+            // Curăță input-ul după trimitere
+            document.getElementById('chatInput').value = "";
+            
+            // Scrool automat la mesaje noi
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    });
+</script>
+
+</body>
+</html>
